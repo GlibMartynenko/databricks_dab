@@ -5,6 +5,12 @@ bundle:
 
 include:
   - resources/*.yml
+  - clusters/*.yml
+
+variables: 
+  dab_notebook:
+    description: This is my dab notebook
+    default: ../notebooks/hello.ipynb
 
 targets:
   dev:
@@ -28,3 +34,5 @@ targets:
         level: CAN_MANAGE
     run_as:
       user_name: dbradmin@helleng.com
+    variables: 
+      dab_notebook: ../notebooks/hello2.ipynb
