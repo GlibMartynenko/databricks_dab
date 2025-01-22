@@ -35,4 +35,4 @@ targets:
     run_as:
       user_name: dbradmin@helleng.com
     variables: 
-      dab_notebook: ../notebooks/hello2.ipynb
+      dab_notebook: ../notebooks/hello_prod.ipynb
