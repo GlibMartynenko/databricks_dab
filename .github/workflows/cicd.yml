@@ -25,6 +25,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checks
+        run: |
+          pwd
+          ls -la
       # Check out this repo, so that this workflow can access it.
       - uses: actions/checkout@v3
 
