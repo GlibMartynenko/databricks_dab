@@ -8,13 +8,13 @@ concurrency: "1"
 
 # Trigger this workflow whenever a pull request is opened against the repo's
 # main branch or an existing pull request's head branch is updated.
-on:
-  pull_request:
-    types:
-      - opened
-      - synchronize
-    branches:
-      - cicd
+on: [push]
+  # pull_request:
+  #   types:
+  #     - opened
+  #     - synchronize
+  #   branches:
+  #     - cicd
 
 jobs:
   # Used by the "pipeline_update" job to deploy the bundle.
