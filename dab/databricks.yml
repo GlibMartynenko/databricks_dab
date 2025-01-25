@@ -11,6 +11,9 @@ variables:
   dab_notebook:
     description: This is my dab notebook
     default: ../notebooks/hello.ipynb
+  partition_date:
+    description: Data as of date
+    default: "2025-01-22"
 
 targets:
   dev:

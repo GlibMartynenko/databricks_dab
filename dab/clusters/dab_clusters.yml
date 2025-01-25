@@ -4,24 +4,23 @@ variables:
     type: complex
     default:
       spark_version: 15.4.x-scala2.12
-      node_type_id: Standard_D3_v2
+      node_type_id: Standard_DS3_v2
       autoscale:
         min_workers: 1
-        max_workers: 4
+        max_workers: 1
       spark_conf:
         spark.speculation: true
+        partitionDate: ${var.partition_date}
+      spark_env_vars:
+        partitionDate: ${var.partition_date}
   dab_cluster_task_2:
       description: "My DAB cluster for task 2"
       type: complex
       default:
         spark_version: 15.4.x-scala2.12
-        node_type_id: Standard_D3_v2
+        node_type_id: Standard_DS3_v2
         autoscale:
           min_workers: 1
           max_workers: 1
         spark_conf:
           spark.speculation: true
-  existing_cluster:
-      description: "My existing cluster"
-      lookup:
-        cluster: "shared_cluster"

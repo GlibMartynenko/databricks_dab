@@ -12,16 +12,20 @@ resources:
         on_failure:
           - dbradmin@helleng.com
       tasks:
-        - task_key: notebook_task
+        - task_key: t1
           job_cluster_key: job_cluster
           notebook_task:
-            #notebook_path: ../src/notebook.ipynb
             notebook_path: ${var.dab_notebook}
-        - task_key: notebook_task_2
-          existing_cluster_id: ${var.existing_cluster}
+            base_parameters:
+              t1_param: "param-1"
+        - task_key: t2
+          job_cluster_key: job_cluster
+          depends_on:
+            - task_key: t1
           notebook_task:
-            #notebook_path: ../src/notebook.ipynb
-            notebook_path: ${var.dab_notebook}
+            notebook_path: ../notebooks/hello_2.ipynb
+            base_parameters:
+              from_t1: "{{tasks.t1.values.from_t1}}"
       job_clusters:
         - job_cluster_key: job_cluster
           new_cluster: ${var.dab_cluster_task_1}
