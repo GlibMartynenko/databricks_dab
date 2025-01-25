@@ -40,7 +40,7 @@ jobs:
       # Deploy the bundle to the "dev" target as defined
       # in the bundle's settings file.
       - run: databricks bundle deploy
-        working-directory: ../dab
+        working-directory: dab
         env:
           DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
           DATABRICKS_BUNDLE_ENV: dev
@@ -64,7 +64,7 @@ jobs:
       # Run the Databricks workflow named "dab_job" as defined in the
       # bundle that was just deployed.
       - run: databricks bundle run dab_job --refresh-all
-        working-directory: .
+        working-directory: dab
         env:
           DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
           DATABRICKS_BUNDLE_ENV: dev
