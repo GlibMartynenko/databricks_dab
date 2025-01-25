@@ -43,6 +43,7 @@ jobs:
         run: |
           pwd
           ls -la
+          cat ~/.databrickscfg
 
       # Deploy the bundle to the "dev" target as defined
       # in the bundle's settings file.
