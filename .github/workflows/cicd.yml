@@ -27,22 +27,9 @@ jobs:
       # See https://github.com/databricks/setup-cli
       - uses: databricks/setup-cli@main
 
-      # - name: Configure Databricks CLI
-      #   run: |
-      #     touch ~/.databrickscfg
-      #     echo "[DEFAULT]" > ~/.databrickscfg
-      #     echo "host = https://adb-2248610192980166.6.azuredatabricks.net" >> ~/.databrickscfg
-      #     echo "token = ${{ secrets.SP_TOKEN }}" >> ~/.databrickscfg
-
-      # - name: Checks
-      #   run: |
-      #     pwd
-      #     ls -la
-      #     cat ~/.databrickscfg
-
       # Deploy the bundle to the "dev" target as defined
       # in the bundle's settings file.
-      - run: databricks bundle deploy
+      - run: databricks bundle deploy 
         working-directory: dab
         env:
           DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
