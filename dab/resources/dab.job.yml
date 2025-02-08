@@ -3,28 +3,29 @@ resources:
   jobs:
     dab_job:
       name: dab_job
-
       trigger:
         # Run this job every day, exactly one day from the last run; see https://docs.databricks.com/api/workspace/jobs/create#trigger
         periodic:
           interval: 1
           unit: DAYS
-
       email_notifications:
         on_failure:
           - dbradmin@helleng.com
-
       tasks:
-        - task_key: notebook_task
+        - task_key: t1
           job_cluster_key: job_cluster
           notebook_task:
-            notebook_path: ../src/notebook.ipynb
-        
+            notebook_path: ${var.dab_notebook}
+            base_parameters:
+              t1_param: "param-1"
+        - task_key: t2
+          job_cluster_key: job_cluster
+          depends_on:
+            - task_key: t1
+          notebook_task:
+            notebook_path: ../notebooks/hello_2.ipynb
+            base_parameters:
+              from_t1: "{{tasks.t1.values.from_t1}}"
       job_clusters:
         - job_cluster_key: job_cluster
-          new_cluster:
-            spark_version: 15.4.x-scala2.12
-            node_type_id: Standard_D3_v2
-            autoscale:
-                min_workers: 1
-                max_workers: 4
+          new_cluster: ${var.dab_cluster_task_1}
