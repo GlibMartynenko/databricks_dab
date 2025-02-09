@@ -1,0 +1,30 @@
+# The main job for dab.
+resources:
+  jobs:
+    job_1:
+      name: job_1
+      trigger:
+        # Run this job every day, exactly one day from the last run; see https://docs.databricks.com/api/workspace/jobs/create#trigger
+        periodic:
+          interval: 1
+          unit: DAYS
+      email_notifications:
+        on_failure:
+          - dbradmin@helleng.com
+      tasks:
+        - task_key: job_1_t1
+          job_cluster_key: job_cluster
+          notebook_task:
+            notebook_path: ${var.dab_notebook}
+            base_parameters:
+              t1_param: "param-1"
+        - task_key: job_2_trigger
+          depends_on:
+            - task_key: job_1_t1
+          run_job_task:
+            job_id: ${resources.jobs.job_2.id}
+            job_parameters:
+              param_from_job_1: "{{tasks.job_1_t1.values.from_t1}}"
+      job_clusters:
+        - job_cluster_key: job_cluster
+          new_cluster: ${var.dab_cluster_task_1}
