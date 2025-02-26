@@ -1,0 +1,18 @@
+[project]
+name = "wheel-poetry"
+version = "0.1.0"
+description = "wheel poetry demo"
+authors = [
+    {name = "glibmartynenko",email = "glibmartynenko@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+]
+
+[tool.poetry.scripts]
+main = "wheel_poetry.main:main"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
