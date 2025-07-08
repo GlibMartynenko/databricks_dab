@@ -5,6 +5,9 @@ pool:
 
 variables:
   - group: 'DatabricksSettings'
+  - name: SOURCE_DIR
+    value: q_a/azure_devops_sp
+
 
 steps:
 # 1. Install Databricks CLI (if not present)
@@ -17,11 +20,15 @@ steps:
 
 # 2. Run DAB validation
 - script: |
-    pwd
-    ls -la
     databricks bundle validate
-  workingDirectory: q_a/azure_devops_sp
-  env:
-    DATABRICKS_HOST: $(DATABRICKS_HOST)
-    DATABRICKS_TOKEN: $(DATABRICKS_TOKEN)
+  workingDirectory: $(SOURCE_DIR)
+  # env:
+  #   DATABRICKS_HOST: $(DATABRICKS_HOST)
+  #   DATABRICKS_TOKEN: $(DATABRICKS_TOKEN)
 
+- script: |
+    databricks bundle deploy
+  workingDirectory: $(SOURCE_DIR)
+  # env:
+  #   DATABRICKS_HOST: $(DATABRICKS_HOST)
+  #   DATABRICKS_TOKEN: $(DATABRICKS_TOKEN)
