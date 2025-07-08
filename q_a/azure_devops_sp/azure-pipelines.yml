@@ -14,8 +14,10 @@ steps:
         echo "Databricks CLI installed";
     fi
 
+
 # 2. Run DAB validation
 - script: |
+    cd ./databricks_dab/q_a/azure_devops_sp
     databricks bundle validate
   env:
     DATABRICKS_HOST: $(DATABRICKS_HOST)
