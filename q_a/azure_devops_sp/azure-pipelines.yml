@@ -18,6 +18,7 @@ steps:
 # 2. Run DAB validation
 - script: |
     pwd
+    ls -la
     databricks bundle validate
   env:
     DATABRICKS_HOST: $(DATABRICKS_HOST)
