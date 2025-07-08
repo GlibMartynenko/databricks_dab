@@ -19,8 +19,8 @@ steps:
 - script: |
     pwd
     ls -la
-    cd ./q_a/azure_devops_sp
     databricks bundle validate
+  workingDirectory: q_a/azure_devops_sp
   env:
     DATABRICKS_HOST: $(DATABRICKS_HOST)
     DATABRICKS_TOKEN: $(DATABRICKS_TOKEN)
