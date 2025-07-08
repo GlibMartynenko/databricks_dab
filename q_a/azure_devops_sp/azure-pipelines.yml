@@ -1,0 +1,22 @@
+trigger: none
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  - group: 'DatabricksSettings'
+
+steps:
+# 1. Install Databricks CLI (if not present)
+- script: |
+    if ! command -v databricks &> /dev/null; then
+        wget https://downloads.databricks.com/dbcli/dist/latest/dbcli/linux/databricks-cli -O databricks;
+        chmod +x databricks;
+        ./databricks setup --token $(DATABRICKS_TOKEN) --host $(DATABRICKS_HOST);
+        echo "Databricks CLI installed";
+    fi
+
+# 2. Run DAB validation
+- script: |
+    ./databricks bundle validate
+
