@@ -11,12 +11,12 @@ pool:
 
 steps:
 # 1. Install Databricks CLI (if not present)
-  # - script: |
-  #     if ! command -v databricks &> /dev/null; then
-  #         curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
-  #         echo "Databricks CLI installed";
-  #     fi
-  #   displayName: Databricks CLI install
+- script: |
+    if ! command -v databricks &> /dev/null; then
+        curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
+        echo "Databricks CLI installed";
+    fi
+  displayName: Databricks CLI install
 
 
 - task: AzureCLI@2
