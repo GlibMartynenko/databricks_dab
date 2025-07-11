@@ -21,7 +21,7 @@ steps:
 
 - task: AzureCLI@2
   inputs:
-    azureSubscription: bf9e1a1a-dfec-417c-afa4-fd2fe4aaf814
+    azureSubscription: DAB_CONNECTION
     useGlobalConfig: true
     scriptType: bash
     scriptLocation: inlineScript
