@@ -16,19 +16,23 @@ steps:
         curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
         echo "Databricks CLI installed";
     fi
+  displayName: Databricks CLI install
 
 
 # 2. Run DAB validation
 - script: |
     databricks bundle validate
   workingDirectory: $(SOURCE_DIR)
+  displayName: DAB validation
   # env:
   #   DATABRICKS_HOST: $(DATABRICKS_HOST)
   #   DATABRICKS_TOKEN: $(DATABRICKS_TOKEN)
 
+
 - script: |
     databricks bundle deploy
   workingDirectory: $(SOURCE_DIR)
+  displayName: DAB deployemnt
   # env:
   #   DATABRICKS_HOST: $(DATABRICKS_HOST)
   #   DATABRICKS_TOKEN: $(DATABRICKS_TOKEN)
