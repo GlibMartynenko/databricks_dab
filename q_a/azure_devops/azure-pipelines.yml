@@ -4,7 +4,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-#   - group: 'DatabricksSettings'
+  - group: 'DatabricksSettings'
   - name: SOURCE_DIR
     value: q_a/azure_devops
 
@@ -26,7 +26,7 @@ steps:
     scriptType: bash
     scriptLocation: inlineScript
     inlineScript: |
-      export DATABRICKS_HOST=https://adb-2248610192980166.6.azuredatabricks.net/
+      export DATABRICKS_HOST=https://adb-2248610192980166.6.azuredatabricks.net
       databricks bundle deploy
     workingDirectory: $(SOURCE_DIR)
 
