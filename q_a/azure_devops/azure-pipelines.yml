@@ -4,7 +4,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  - group: 'DatabricksSettings'
+  #- group: 'DatabricksSettings'
   - name: SOURCE_DIR
     value: q_a/azure_devops
 
