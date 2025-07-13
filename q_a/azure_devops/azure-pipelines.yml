@@ -1,0 +1,49 @@
+trigger: none
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  - group: 'DatabricksSettings'
+  - name: SOURCE_DIR
+    value: q_a/azure_devops
+
+
+steps:
+# 1. Install Databricks CLI (if not present)
+- script: |
+    if ! command -v databricks &> /dev/null; then
+        curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
+        echo "Databricks CLI installed";
+    fi
+  displayName: Databricks CLI install
+
+
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: DAB_CONNECTION
+    useGlobalConfig: true
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      export DATABRICKS_HOST=https://adb-2248610192980166.6.azuredatabricks.net
+      databricks bundle deploy
+    workingDirectory: $(SOURCE_DIR)
+
+# # 2. Run DAB validation
+# - script: |
+#     databricks bundle validate
+#   workingDirectory: $(SOURCE_DIR)
+#   displayName: DAB validation
+#   # env:
+#   #   DATABRICKS_HOST: $(DATABRICKS_HOST)
+#   #   DATABRICKS_TOKEN: $(DATABRICKS_TOKEN)
+
+
+# - script: |
+#     databricks bundle deploy
+#   workingDirectory: $(SOURCE_DIR)
+#   displayName: DAB deployemnt
+#   # env:
+#   #   DATABRICKS_HOST: $(DATABRICKS_HOST)
+#   #   DATABRICKS_TOKEN: $(DATABRICKS_TOKEN)
